@@ -2,12 +2,9 @@
 <fieldset class="box-payment-group2 box-payment-option box-payment-newpayment newPaymentGroup">
 <script type="text/javascript">
   $(document).ready(function() {
-    alert("hi");
   });
 
   $(window).on("orderFormUpdated.vtex", function(evt, orderForm) {
-    alert("Someone changed the orderForm!")
-    console.log(orderForm)
   })
   function netpayDeviceFingerPrint(orgId) {
     let sessionID = new Date().getTime() + netpayGenerateString(5);
@@ -38,9 +35,7 @@
     return result;
   }
   //TODO
-  alert("hi");
-  let deviceFingerPrint = netpayDeviceFingerPrint('45ssiuz3');
-  alert(deviceFingerPrint);
+  let deviceFingerPrint = netpayDeviceFingerPrint('9ozphlqx');
   window.vtex.deviceFingerprint = deviceFingerPrint;
 </script>
   <h3 class="payment-newpayment-title" data-i18n="paymentData.paymentGroup.debitoBancario.title">
