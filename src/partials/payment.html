@@ -1,0 +1,54 @@
+<!-- In the line below, you can change just last two classes, respecting the name pattern  -->
+<fieldset class="box-payment-group2 box-payment-option box-payment-newpayment newPaymentGroup">
+<script type="text/javascript">
+  $(document).ready(function() {
+    alert("hi");
+  });
+
+  $(window).on("orderFormUpdated.vtex", function(evt, orderForm) {
+    alert("Someone changed the orderForm!")
+    console.log(orderForm)
+  })
+  function netpayDeviceFingerPrint(orgId) {
+    let sessionID = new Date().getTime() + netpayGenerateString(5);
+    let tmScript = document.createElement("script");
+    tmScript.src = "https://h.online-metrix.net/fp/tags.js?org_id=" + orgId + "&session_id=" + sessionID;
+    tmScript.type = "text/javascript";
+    document.getElementsByTagName("head")[0].appendChild(tmScript);
+    //Iframe Code
+    let iframeTM = document.createElement("iframe");
+    iframeTM.setAttribute('id', 'iframeTM');
+    iframeTM.style.width = "100px";
+    iframeTM.style.height = "100px";
+    iframeTM.style.border = "0";
+    iframeTM.style.position = "absolute";
+    iframeTM.style.top = "-5000px";
+    iframeTM.src = "https://h.online-metrix.net/fp/tags?org_id=" + orgId + "&session_id=" + sessionID;
+    document.body.appendChild(iframeTM);
+    return sessionID;
+  }
+
+  function netpayGenerateString(length) {
+    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+  //TODO
+  alert("hi");
+  let deviceFingerPrint = netpayDeviceFingerPrint('45ssiuz3');
+  alert(deviceFingerPrint);
+  window.vtex.deviceFingerprint = deviceFingerPrint;
+</script>
+  <h3 class="payment-newpayment-title" data-i18n="paymentData.paymentGroup.debitoBancario.title">
+    <div id="netpay-card-line"></div>
+  </h3>
+  <div class="payment-newpayment-help">
+    <span class="payment-newpayment-help-text muted" data-i18n="paymentData.paymentGroup.debitoBancario.contact">
+      Compra Segura con NetPay.
+    </span>
+  </div>
+</fieldset>
